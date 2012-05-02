@@ -1,6 +1,4 @@
-<h1>Editing restrant</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @restrant %> |
-<%= link_to 'Back', restrants_path %>
+<%- model_class = @restrant.class -%>
+<h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
+                                 :default => "Edit #{model_class.model_name.human}") %></h1>
+<%= render :partial => 'form' %>

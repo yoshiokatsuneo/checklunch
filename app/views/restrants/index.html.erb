@@ -1,27 +1,37 @@
-<h1>Listing restrants</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Url</th>
-    <th>Logo url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @restrants.each do |restrant| %>
-  <tr>
-    <td><%= restrant.name %></td>
-    <td><%= restrant.url %></td>
-    <td><%= restrant.logo_url %></td>
-    <td><%= link_to 'Show', restrant %></td>
-    <td><%= link_to 'Edit', edit_restrant_path(restrant) %></td>
-    <td><%= link_to 'Destroy', restrant, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<%- model_class = Restrant.new.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:url) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @restrants.each do |restrant| %>
+      <tr>
+        <td><%= link_to restrant.id, restrant_path(restrant) %></td>
+        <td><%= restrant.name %></td>
+        <!-- td><%= image_tag(restrant.logo_url) %><br><br -->
+        <td><%= link_to(image_tag(restrant.logo_url) + " " + restrant.url, restrant.url) %></td>
+        <td><%=l restrant.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_restrant_path(restrant), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      restrant_path(restrant),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Restrant', new_restrant_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_restrant_path,
+            :class => 'btn btn-primary' %>
