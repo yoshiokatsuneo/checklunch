@@ -1,0 +1,2 @@
+module RestrantsHelper
+end

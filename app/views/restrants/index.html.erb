@@ -1,0 +1,27 @@
+<h1>Listing restrants</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Logo url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @restrants.each do |restrant| %>
+  <tr>
+    <td><%= restrant.name %></td>
+    <td><%= restrant.url %></td>
+    <td><%= restrant.logo_url %></td>
+    <td><%= link_to 'Show', restrant %></td>
+    <td><%= link_to 'Edit', edit_restrant_path(restrant) %></td>
+    <td><%= link_to 'Destroy', restrant, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Restrant', new_restrant_path %>

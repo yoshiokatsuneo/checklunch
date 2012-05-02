@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @restrant.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @restrant.url %>
+</p>
+
+<p>
+  <b>Logo url:</b>
+  <%= @restrant.logo_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_restrant_path(@restrant) %> |
+<%= link_to 'Back', restrants_path %>
