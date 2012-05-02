@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120430120636) do
+ActiveRecord::Schema.define(:version => 20120501211955) do
+
+  create_table "allmenus", :force => true do |t|
+    t.string   "title"
+    t.date     "date"
+    t.float    "price"
+    t.integer  "restrant_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "allmenus", ["restrant_id"], :name => "index_allmenus_on_restrant_id"
 
   create_table "menus", :force => true do |t|
     t.string   "title"

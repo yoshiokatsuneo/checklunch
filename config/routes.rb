@@ -1,9 +1,11 @@
 Checklunch::Application.routes.draw do
+  resources :allmenus
+
   resources :restrants do
     resources :menus
   end
 
-    resources :menus
+    resources :menus, :controller => 'allmenus'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
