@@ -17,6 +17,8 @@
       <%= f.text_field :logo_url, :class => 'text_field' %>
     </div>
   </div>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              restrant_menus_path(@restrant), :class => 'btn' %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

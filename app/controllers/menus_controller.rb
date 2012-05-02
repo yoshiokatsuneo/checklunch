@@ -1,9 +1,18 @@
 class MenusController < ApplicationController
+  before_filter :load_restrant
+  def load_restrant
+    @restrant = Restrant.find(params[:restrant_id])
+  end
+  
   # GET /menus
   # GET /menus.json
   def index
-    @menus = Menu.all
-
+    if(@restrant)then
+      @menus = @restrant.menus.all
+    else
+      @menus = Menu.all
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @menus }
@@ -24,7 +33,11 @@ class MenusController < ApplicationController
   # GET /menus/new
   # GET /menus/new.json
   def new
-    @menu = Menu.new
+    if(@restrant)then
+      @menu = @restrant.menus.new
+    else
+      @menu = Menu.new
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,11 +53,15 @@ class MenusController < ApplicationController
   # POST /menus
   # POST /menus.json
   def create
-    @menu = Menu.new(params[:menu])
+    if(@restrant)then
+      @menu = @restrant.menus.new(params[:menu])
+    else
+      @menu = Menu.new(params[:menu])
+    end
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.html { redirect_to([@restrant,@menu], notice: 'Menu was successfully created.') }
         format.json { render json: @menu, status: :created, location: @menu }
       else
         format.html { render action: "new" }
@@ -56,11 +73,15 @@ class MenusController < ApplicationController
   # PUT /menus/1
   # PUT /menus/1.json
   def update
-    @menu = Menu.find(params[:id])
+    if(@restrant)then
+      @menu = @restrant.menus.find(params[:id])
+    else
+      @menu = Menu.find(params[:id])
+    end
 
     respond_to do |format|
       if @menu.update_attributes(params[:menu])
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
+        format.html { redirect_to [@restrant, @menu], notice: 'Menu was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +93,16 @@ class MenusController < ApplicationController
   # DELETE /menus/1
   # DELETE /menus/1.json
   def destroy
-    @menu = Menu.find(params[:id])
+    if(@restrant)then
+      @menu = @restrant.menus.find(params[:id])
+    else
+      @menu = Menu.find(params[:id])
+    end
     @menu.destroy
 
     respond_to do |format|
-      format.html { redirect_to menus_url }
+#      format.html { redirect_to menus_url }
+      format.html { redirect_to restrant_menus_url(@restrant) }
       format.json { head :no_content }
     end
   end
