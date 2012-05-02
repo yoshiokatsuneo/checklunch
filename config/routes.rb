@@ -1,4 +1,6 @@
 Checklunch::Application.routes.draw do
+  resources :menus
+
   resources :restrants
 
   # The priority is based upon order of creation:
