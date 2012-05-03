@@ -2,7 +2,9 @@ Checklunch::Application.routes.draw do
   # resources :allmenus
 
   resources :restrants do
-    resources :menus
+    resources :menus do
+      delete 'destroy', :on => :collection
+    end
   end
 
     resources :menus, :controller => 'allmenus'
@@ -56,7 +58,7 @@ Checklunch::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => 'restrants#index'
+  root :to => 'allmenus#index'
 
   # See how all your routes lay out with "rake routes"
 

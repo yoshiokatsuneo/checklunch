@@ -6,7 +6,6 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:url) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -14,10 +13,13 @@
     <% @restrants.each do |restrant| %>
       <tr>
         <td><%= link_to restrant.id, restrant_path(restrant) %></td>
-        <td><%= restrant.name %></td>
+        <td><%= link_to restrant.name, restrant_path(restrant) %></td>
         <!-- td><%= image_tag(restrant.logo_url) %><br><br -->
-        <td><%= link_to(image_tag(restrant.logo_url) + " " + restrant.url, restrant.url) %></td>
-        <td><%=l restrant.created_at %></td>
+        <td>
+		<%= link_to(image_tag(restrant.logo_url), restrant.url) %>
+		<br/>
+        <%= link_to(restrant.url, restrant.url) %>
+		</td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_restrant_path(restrant), :class => 'btn btn-mini' %>

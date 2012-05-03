@@ -106,4 +106,25 @@ class MenusController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # DELETE /menus
+  # DELETE /menus.json
+  def destroy
+    if(@restrant)then
+      @menus = @restrant.menus.all
+    else
+      @menus = Menu.all
+    end
+    @menus.each{|menu|
+      menu.destroy
+    }
+
+    respond_to do |format|
+#      format.html { redirect_to menus_url }
+      format.html { redirect_to restrant_menus_url(@restrant) }
+      format.json { head :no_content }
+    end
+  end
+
+
 end

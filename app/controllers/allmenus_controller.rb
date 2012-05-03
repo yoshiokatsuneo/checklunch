@@ -1,7 +1,7 @@
 class AllmenusController < ApplicationController
   before_filter :before_filter_func
   def before_filter_func
-    @order_id = ((params && params[:order_id].to_i) || 1)
+    @order_id = ((params[:order_id] && params[:order_id].to_i) || 2)
   end
   
   def initialize
@@ -12,7 +12,7 @@ class AllmenusController < ApplicationController
       :wherestr => "date >= \"#{Date.today}\"",
     },
     {
-      :name => 'Always',
+      :name => 'All',
       :wherestr => "1 = 1",
     },
     {
@@ -22,84 +22,84 @@ class AllmenusController < ApplicationController
   ]
     super
   end
-  # GET /allmenus
-  # GET /allmenus.json
+  # GET /menus
+  # GET /menus.json
   def index
-    @allmenus = Menu.where(@orders[@order_id][:wherestr]).order("date").all
+    @menus = Menu.where(@orders[@order_id][:wherestr]).order("date, restrant_id").all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @allmenus }
+      format.json { render json: @menus }
     end
   end
 
-  # GET /allmenus/1
-  # GET /allmenus/1.json
+  # GET /menus/1
+  # GET /menus/1.json
   def show
-    @allmenu = Menu.find(params[:id])
+    @menu = Menu.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @allmenu }
+      format.json { render json: @menu }
     end
   end
 
-  # GET /allmenus/new
-  # GET /allmenus/new.json
+  # GET /menus/new
+  # GET /menus/new.json
   def new
-    @allmenu = Menu.new
+    @menu = Menu.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @allmenu }
+      format.json { render json: @menu }
     end
   end
 
-  # GET /allmenus/1/edit
+  # GET /menus/1/edit
   def edit
-    @allmenu = Menu.find(params[:id])
+    @menu = Menu.find(params[:id])
   end
 
-  # POST /allmenus
-  # POST /allmenus.json
+  # POST /menus
+  # POST /menus.json
   def create
-    @allmenu = Menu.new(params[:allmenu])
+    @menu = Menu.new(params[:menu])
 
     respond_to do |format|
-      if @allmenu.save
-        format.html { redirect_to @allmenu, notice: 'Menu was successfully created.' }
-        format.json { render json: @allmenu, status: :created, location: @allmenu }
+      if @menu.save
+        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.json { render json: @menu, status: :created, location: @menu }
       else
         format.html { render action: "new" }
-        format.json { render json: @allmenu.errors, status: :unprocessable_entity }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /allmenus/1
-  # PUT /allmenus/1.json
+  # PUT /menus/1
+  # PUT /menus/1.json
   def update
-    @allmenu = Menu.find(params[:id])
+    @menu = Menu.find(params[:id])
 
     respond_to do |format|
-      if @allmenu.update_attributes(params[:allmenu])
-        format.html { redirect_to @allmenu, notice: 'Menu was successfully updated.' }
+      if @menu.update_attributes(params[:menu])
+        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @allmenu.errors, status: :unprocessable_entity }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /allmenus/1
-  # DELETE /allmenus/1.json
+  # DELETE /menus/1
+  # DELETE /menus/1.json
   def destroy
-    @allmenu = Menu.find(params[:id])
-    @allmenu.destroy
+    @menu = Menu.find(params[:id])
+    @menu.destroy
 
     respond_to do |format|
-      format.html { redirect_to allmenus_url }
+      format.html { redirect_to menus_url }
       format.json { head :no_content }
     end
   end
