@@ -109,7 +109,7 @@ class MenusController < ApplicationController
 
   # DELETE /menus
   # DELETE /menus.json
-  def destroy
+  def destroy_all
     if(@restrant)then
       @menus = @restrant.menus.all
     else
