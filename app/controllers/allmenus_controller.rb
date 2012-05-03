@@ -5,7 +5,7 @@ class AllmenusController < ApplicationController
     @orders = [
       {
         :name => 'Today or lator',
-        :wherestr => "date >= \"#{client_today}\"",
+        :wherestr => "date >= '#{client_today}'",
       },
       {
         :name => 'All',
@@ -13,7 +13,7 @@ class AllmenusController < ApplicationController
       },
       {
         :name => 'Today',
-        :wherestr => "date = \"#{client_today}\"",
+        :wherestr => "date = '#{client_today}'",
       }
     ]
   end
