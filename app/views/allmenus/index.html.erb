@@ -5,6 +5,7 @@
 <%= select_tag(:order_id, options_for_select(@orders.map{|item| item[:name]}.zip( (0..@orders.length-1).to_a), @order_id), onchange: 'this.form.submit()') %>
 <% end %>
 </div>
+Test2: <%= cookies[:gmtoffset] %>
 <table class="table table-striped">
   <thead>
     <tr>

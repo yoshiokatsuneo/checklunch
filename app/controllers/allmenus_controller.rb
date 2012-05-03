@@ -2,24 +2,26 @@ class AllmenusController < ApplicationController
   before_filter :before_filter_func
   def before_filter_func
     @order_id = ((params[:order_id] && params[:order_id].to_i) || 2)
+    @orders = [
+      {
+        :name => 'Today or lator',
+        :wherestr => "date >= \"#{client_today}\"",
+      },
+      {
+        :name => 'All',
+        :wherestr => "1 = 1",
+      },
+      {
+        :name => 'Today',
+        :wherestr => "date = \"#{client_today}\"",
+      }
+    ]
   end
-  
+  def client_today
+    gmtoffset = cookies[:gmtoffset].to_i
+    return (Time.now - (gmtoffset) *60).to_date.to_s
+  end
   def initialize
-  @order_id = 1
-  @orders = [
-    {
-      :name => 'Today or lator',
-      :wherestr => "date >= \"#{Date.today}\"",
-    },
-    {
-      :name => 'All',
-      :wherestr => "1 = 1",
-    },
-    {
-      :name => 'Today',
-      :wherestr => "date = \"#{Date.today}\"",
-    }
-  ]
     super
   end
   # GET /menus

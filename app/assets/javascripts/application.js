@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+if(navigator.cookieEnabled){
+	var now = new Date();
+	var gmtoffset = now.getTimezoneOffset();
+	if($.cookie('gmtoffset') != gmtoffset){
+	$.event.add(window, 'load', function(e) {
+	// use ajax to set the time zone here.
+	var set_time = $.ajax({url:'/gmtoffset/gmtoffset?gmtoffset='+gmtoffset, success:function(resonse){alert("aa"); document.location.reload();} });
+	});
+	}
+}

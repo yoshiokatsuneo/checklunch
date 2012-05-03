@@ -1,4 +1,6 @@
 Checklunch::Application.routes.draw do
+  get "gmtoffset/gmtoffset"
+
   # resources :allmenus
 
   resources :restrants do
