@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class RestrantsController < ApplicationController
   # GET /restrants
   # GET /restrants.json
@@ -57,16 +59,40 @@ class RestrantsController < ApplicationController
   # PUT /restrants/1.json
   def update
     @restrant = Restrant.find(params[:id])
+    if params[:update_menu_from_url] then
+      update_menu_from_url
+      return
+    end
 
     respond_to do |format|
       if @restrant.update_attributes(params[:restrant])
-        format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
-        format.json { head :no_content }
+          format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
+          format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @restrant.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_menu_from_url
+    @restrant = Restrant.find(params[:id])
+    @restrant.update_attributes(params[:restrant])
+    @restrant.menus.destroy_all
+    body = open(@restrant.menu_url).read
+    doc = JSON.parse(body)
+    doc.each{|item|
+        date = item['date']
+        title = item['title']
+        price = item['price']
+        menu = @restrant.menus.new({:date => date, :title => title, :price => price})
+        menu.save
+      }
+    respond_to do |format|
+      format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
+      format.json { head :no_content }
+    end
+    
   end
 
   # DELETE /restrants/1

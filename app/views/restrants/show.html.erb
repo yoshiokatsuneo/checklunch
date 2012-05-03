@@ -13,6 +13,12 @@
   <strong><%= model_class.human_attribute_name(:logo_url) %>:</strong><br>
   <%= @restrant.logo_url %>
 </p>
+<p>
+  <strong><%= model_class.human_attribute_name(:menu_url) %>:</strong><br>
+  <%= @restrant.menu_url %>
+  <%= link_to t('.edit', :default => t("Update menus")),
+          update_menu_from_url_restrant_path(@restrant), :class => 'btn' %>
+</p>
 <%= link_to t('.back', :default => t("Menus")),
             restrant_menus_path(@restrant), :class => 'btn'  %>
 
