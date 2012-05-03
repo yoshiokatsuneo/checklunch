@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502104859) do
+ActiveRecord::Schema.define(:version => 20120503185934) do
 
   create_table "allmenus", :force => true do |t|
     t.string   "title"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120502104859) do
     t.string   "logo_url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "menu_url"
   end
 
 end

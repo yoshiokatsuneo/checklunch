@@ -5,7 +5,10 @@ Checklunch::Application.routes.draw do
 
   resources :restrants do
     resources :menus do
-      delete 'destroy', :on => :collection
+      delete 'destroy_all', :on => :collection
+    end
+    member do
+      get 'update_menu_from_url'
     end
   end
 
