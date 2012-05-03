@@ -1,8 +1,31 @@
 class AllmenusController < ApplicationController
+  before_filter :before_filter_func
+  def before_filter_func
+    @order_id = ((params && params[:order_id].to_i) || 1)
+  end
+  
+  def initialize
+  @order_id = 1
+  @orders = [
+    {
+      :name => 'Today or lator',
+      :wherestr => "date >= \"#{Date.today}\"",
+    },
+    {
+      :name => 'Always',
+      :wherestr => "1 = 1",
+    },
+    {
+      :name => 'Today',
+      :wherestr => "date = \"#{Date.today}\"",
+    }
+  ]
+    super
+  end
   # GET /allmenus
   # GET /allmenus.json
   def index
-    @allmenus = Menu.all
+    @allmenus = Menu.where(@orders[@order_id][:wherestr]).order("date").all
 
     respond_to do |format|
       format.html # index.html.erb

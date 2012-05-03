@@ -1,5 +1,5 @@
 Checklunch::Application.routes.draw do
-  resources :allmenus
+  # resources :allmenus
 
   resources :restrants do
     resources :menus

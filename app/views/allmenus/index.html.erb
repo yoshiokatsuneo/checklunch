@@ -1,5 +1,10 @@
 <%- model_class = Menu.new.class -%>
 <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<div align=right>
+<%= form_tag({}, :method => :get) do %>
+<%= select_tag(:order_id, options_for_select(@orders.map{|item| item[:wherestr]}.zip( (0..@orders.length-1).to_a), @order_id), onchange: 'this.form.submit()') %>
+<% end %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,7 +24,10 @@
         <td><%= allmenu.title %></td>
         <td><%= allmenu.date %></td>
         <td><%= allmenu.price %></td>
-        <td><%= Restrant.find(allmenu.restrant_id).name %></td>
+        <td>
+	        <%= allmenu.restrant_id %>
+
+<!--%= Restrant.find(allmenu.restrant_id).name %--></td>
         <td><%=l allmenu.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

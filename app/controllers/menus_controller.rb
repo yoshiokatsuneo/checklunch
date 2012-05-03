@@ -8,7 +8,7 @@ class MenusController < ApplicationController
   # GET /menus.json
   def index
     if(@restrant)then
-      @menus = @restrant.menus.all
+      @menus = @restrant.menus.order("date").all
     else
       @menus = Menu.all
     end
