@@ -22,9 +22,9 @@
       <tr>
         <td><%= link_to menu.id, menu_path(menu) %></td>
         <td>
-     <%= image_tag(Restrant.find(menu.restrant_id).logo_url, width:"100") %>
+     <%= link_to(image_tag(Restrant.find(menu.restrant_id).logo_url, width:"100"), restrant_path(menu.restrant_id)) %>
 <br/>
-	 <%=  Restrant.find(menu.restrant_id).name %>
+	 <%=  link_to(Restrant.find(menu.restrant_id).name,restrant_path(menu.restrant_id))  %>
 	</td>
         <td><%= simple_format(h(menu.title)) %></td>
         <td><%= menu.date %></td>
