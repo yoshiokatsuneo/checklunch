@@ -74,17 +74,20 @@ class RestrantsController < ApplicationController
       end
     end
   end
-  def update_all_restrants_menus
+  def self.update_all_restrants_menus_itr
     restrants = Restrant.all
     restrants.each{|restrant|
       update_menu_from_url_itr(restrant)
     }
+  end
+  def update_all_restrants_menus
+    update_all_restrants_menus_itr
     respond_to do |format|
       format.html { redirect_to menus_url, notice: 'Restrant was successfully updated.' }
       format.json { head :no_content }
     end
   end
-  def update_menu_from_url_itr(restrant)
+  def self.update_menu_from_url_itr(restrant)
     restrant.menus.destroy_all
     body = open(restrant.menu_url).read
     doc = JSON.parse(body)
