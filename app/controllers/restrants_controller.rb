@@ -81,7 +81,7 @@ class RestrantsController < ApplicationController
     }
   end
   def update_all_restrants_menus
-    update_all_restrants_menus_itr
+    self.class.update_all_restrants_menus_itr
     respond_to do |format|
       format.html { redirect_to menus_url, notice: 'Restrant was successfully updated.' }
       format.json { head :no_content }
@@ -102,7 +102,7 @@ class RestrantsController < ApplicationController
   def update_menu_from_url
     @restrant = Restrant.find(params[:id])
     @restrant.update_attributes(params[:restrant])
-    update_menu_from_url_itr(@restrant)
+    self.class.update_menu_from_url_itr(@restrant)
     respond_to do |format|
       format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
       format.json { head :no_content }
