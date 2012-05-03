@@ -74,20 +74,32 @@ class RestrantsController < ApplicationController
       end
     end
   end
-
-  def update_menu_from_url
-    @restrant = Restrant.find(params[:id])
-    @restrant.update_attributes(params[:restrant])
-    @restrant.menus.destroy_all
-    body = open(@restrant.menu_url).read
+  def update_all_restrants_menus
+    restrants = Restrant.all
+    restrants.each{|restrant|
+      update_menu_from_url_itr(restrant)
+    }
+    respond_to do |format|
+      format.html { redirect_to menus_url, notice: 'Restrant was successfully updated.' }
+      format.json { head :no_content }
+    end
+  end
+  def update_menu_from_url_itr(restrant)
+    restrant.menus.destroy_all
+    body = open(restrant.menu_url).read
     doc = JSON.parse(body)
     doc.each{|item|
         date = item['date']
         title = item['title']
         price = item['price']
-        menu = @restrant.menus.new({:date => date, :title => title, :price => price})
+        menu = restrant.menus.new({:date => date, :title => title, :price => price})
         menu.save
-      }
+      }    
+  end
+  def update_menu_from_url
+    @restrant = Restrant.find(params[:id])
+    @restrant.update_attributes(params[:restrant])
+    update_menu_from_url_itr(@restrant)
     respond_to do |format|
       format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
       format.json { head :no_content }

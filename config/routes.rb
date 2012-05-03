@@ -10,6 +10,7 @@ Checklunch::Application.routes.draw do
     member do
       get 'update_menu_from_url'
     end
+    get 'update_all_restrants_menus', :on => :collection
   end
 
     resources :menus, :controller => 'allmenus'
