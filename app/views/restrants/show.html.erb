@@ -13,6 +13,8 @@
   <strong><%= model_class.human_attribute_name(:logo_url) %>:</strong><br>
   <%= @restrant.logo_url %>
 </p>
+<%= link_to t('.back', :default => t("Menus")),
+            restrant_menus_path(@restrant), :class => 'btn'  %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
