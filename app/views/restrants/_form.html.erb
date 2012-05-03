@@ -29,8 +29,8 @@
   </div>
   <div class="control-group">
     <div class="controls">
-	  <%= link_to t('.edit', :default => t("Edit menus")),
-              restrant_menus_path(@restrant), :class => 'btn' %>
+	  <%= if(@restrant[:id]) then link_to t('.edit', :default => t("Edit menus")),
+              restrant_menus_path(@restrant), :class => 'btn' ; end %>
 	</div>
   </div>
 
