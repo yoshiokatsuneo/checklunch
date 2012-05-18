@@ -1,34 +1,34 @@
-<%- model_class = @restrant.class -%>
+<%- model_class = @restaurant.class -%>
 <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 
 <p>
   <strong><%= model_class.human_attribute_name(:name) %>:</strong><br>
-  <%= @restrant.name %>
+  <%= @restaurant.name %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:url) %>:</strong><br>
-  <%= @restrant.url %>
+  <%= @restaurant.url %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:logo_url) %>:</strong><br>
-  <%= @restrant.logo_url %>
+  <%= @restaurant.logo_url %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:menu_url) %>:</strong><br>
-  <%= @restrant.menu_url %>
+  <%= @restaurant.menu_url %>
   <%= link_to t('.edit', :default => t("Update menus")),
-          update_menu_from_url_restrant_path(@restrant), :class => 'btn' %>
+          update_menu_from_url_restaurant_path(@restaurant), :class => 'btn' %>
 </p>
 <%= link_to t('.back', :default => t("Menus")),
-            restrant_menus_path(@restrant), :class => 'btn'  %>
+            restaurant_menus_path(@restaurant), :class => 'btn'  %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              restrants_path, :class => 'btn'  %>
+              restaurants_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_restrant_path(@restrant), :class => 'btn' %>
+              edit_restaurant_path(@restaurant), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              restrant_path(@restrant),
+              restaurant_path(@restaurant),
               :method => 'delete',
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>

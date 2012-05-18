@@ -17,25 +17,25 @@ ActiveRecord::Schema.define(:version => 20120503185934) do
     t.string   "title"
     t.date     "date"
     t.float    "price"
-    t.integer  "restrant_id"
+    t.integer  "restaurant_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "allmenus", ["restrant_id"], :name => "index_allmenus_on_restrant_id"
+  add_index "allmenus", ["restaurant_id"], :name => "index_allmenus_on_restaurant_id"
 
   create_table "menus", :force => true do |t|
     t.string   "title"
     t.date     "date"
     t.float    "price"
-    t.integer  "restrant_id", :null => false
+    t.integer  "restaurant_id", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "menus", ["restrant_id"], :name => "index_menus_on_restrant_id"
+  add_index "menus", ["restaurant_id"], :name => "index_menus_on_restaurant_id"
 
-  create_table "restrants", :force => true do |t|
+  create_table "restaurants", :force => true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "logo_url"

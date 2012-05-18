@@ -1,123 +1,123 @@
 require 'open-uri'
 
-class RestrantsController < ApplicationController
-  # GET /restrants
-  # GET /restrants.json
+class RestaurantsController < ApplicationController
+  # GET /restaurants
+  # GET /restaurants.json
   def index
-    @restrants = Restrant.all
+    @restaurants = Restaurant.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @restrants }
+      format.json { render json: @restaurants }
     end
   end
 
-  # GET /restrants/1
-  # GET /restrants/1.json
+  # GET /restaurants/1
+  # GET /restaurants/1.json
   def show
-    @restrant = Restrant.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @restrant }
+      format.json { render json: @restaurant }
     end
   end
 
-  # GET /restrants/new
-  # GET /restrants/new.json
+  # GET /restaurants/new
+  # GET /restaurants/new.json
   def new
-    @restrant = Restrant.new
+    @restaurant = Restaurant.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @restrant }
+      format.json { render json: @restaurant }
     end
   end
 
-  # GET /restrants/1/edit
+  # GET /restaurants/1/edit
   def edit
-    @restrant = Restrant.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
   end
 
-  # POST /restrants
-  # POST /restrants.json
+  # POST /restaurants
+  # POST /restaurants.json
   def create
-    @restrant = Restrant.new(params[:restrant])
+    @restaurant = Restaurant.new(params[:restaurant])
 
     respond_to do |format|
-      if @restrant.save
-        format.html { redirect_to @restrant, notice: 'Restrant was successfully created.' }
-        format.json { render json: @restrant, status: :created, location: @restrant }
+      if @restaurant.save
+        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
+        format.json { render json: @restaurant, status: :created, location: @restaurant }
       else
         format.html { render action: "new" }
-        format.json { render json: @restrant.errors, status: :unprocessable_entity }
+        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /restrants/1
-  # PUT /restrants/1.json
+  # PUT /restaurants/1
+  # PUT /restaurants/1.json
   def update
-    @restrant = Restrant.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
     if params[:update_menu_from_url] then
       update_menu_from_url
       return
     end
 
     respond_to do |format|
-      if @restrant.update_attributes(params[:restrant])
-          format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
+      if @restaurant.update_attributes(params[:restaurant])
+          format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
           format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @restrant.errors, status: :unprocessable_entity }
+        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
     end
   end
-  def self.update_all_restrants_menus_itr
-    restrants = Restrant.all
-    restrants.each{|restrant|
-      update_menu_from_url_itr(restrant)
+  def self.update_all_restaurants_menus_itr
+    restaurants = Restaurant.all
+    restaurants.each{|restaurant|
+      update_menu_from_url_itr(restaurant)
     }
   end
-  def update_all_restrants_menus
-    self.class.update_all_restrants_menus_itr
+  def update_all_restaurants_menus
+    self.class.update_all_restaurants_menus_itr
     respond_to do |format|
-      format.html { redirect_to menus_url, notice: 'Restrant was successfully updated.' }
+      format.html { redirect_to menus_url, notice: 'Restaurant was successfully updated.' }
       format.json { head :no_content }
     end
   end
-  def self.update_menu_from_url_itr(restrant)
-    restrant.menus.destroy_all
-    body = open(restrant.menu_url).read
+  def self.update_menu_from_url_itr(restaurant)
+    restaurant.menus.destroy_all
+    body = open(restaurant.menu_url).read
     doc = JSON.parse(body)
     doc.each{|item|
         date = item['date']
         title = item['title']
         price = item['price']
-        menu = restrant.menus.new({:date => date, :title => title, :price => price})
+        menu = restaurant.menus.new({:date => date, :title => title, :price => price})
         menu.save
       }    
   end
   def update_menu_from_url
-    @restrant = Restrant.find(params[:id])
-    @restrant.update_attributes(params[:restrant])
-    self.class.update_menu_from_url_itr(@restrant)
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.update_attributes(params[:restaurant])
+    self.class.update_menu_from_url_itr(@restaurant)
     respond_to do |format|
-      format.html { redirect_to @restrant, notice: 'Restrant was successfully updated.' }
+      format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
       format.json { head :no_content }
     end
     
   end
 
-  # DELETE /restrants/1
-  # DELETE /restrants/1.json
+  # DELETE /restaurants/1
+  # DELETE /restaurants/1.json
   def destroy
-    @restrant = Restrant.find(params[:id])
-    @restrant.destroy
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.destroy
 
     respond_to do |format|
-      format.html { redirect_to restrants_url }
+      format.html { redirect_to restaurants_url }
       format.json { head :no_content }
     end
   end

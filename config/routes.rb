@@ -3,14 +3,14 @@ Checklunch::Application.routes.draw do
 
   # resources :allmenus
 
-  resources :restrants do
+  resources :restaurants do
     resources :menus do
       delete 'destroy_all', :on => :collection
     end
     member do
       get 'update_menu_from_url'
     end
-    get 'update_all_restrants_menus', :on => :collection
+    get 'update_all_restaurants_menus', :on => :collection
   end
 
     resources :menus, :controller => 'allmenus'

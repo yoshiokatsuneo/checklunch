@@ -27,7 +27,7 @@ class AllmenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
-    @menus = Menu.where(@orders[@order_id][:wherestr]).order("date, restrant_id").all
+    @menus = Menu.where(@orders[@order_id][:wherestr]).order("date, restaurant_id").all
 
     respond_to do |format|
       format.html # index.html.erb

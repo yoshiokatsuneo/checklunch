@@ -1,4 +1,4 @@
 class Menu < ActiveRecord::Base
-  belongs_to :restrant
-  attr_accessible :date, :price, :title, :restrant_id
+  belongs_to :restaurant
+  attr_accessible :date, :price, :title, :restaurant_id
 end

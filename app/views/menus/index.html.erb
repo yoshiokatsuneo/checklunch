@@ -1,5 +1,5 @@
 <%- model_class = Menu.new.class -%>
-<h1><%=t '.title', :default => model_class.model_name.human.pluralize %> (<%= @restrant.name %>)</h1>
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize %> (<%= @restaurant.name %>)</h1>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,7 +7,7 @@
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:restrant_id) %></th>
+      <th><%= model_class.human_attribute_name(:restaurant_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -15,17 +15,17 @@
   <tbody>
     <% @menus.each do |menu| %>
       <tr>
-        <td><%= link_to menu.id, restrant_menu_path(@restrant, menu) %></td>
+        <td><%= link_to menu.id, restaurant_menu_path(@restaurant, menu) %></td>
         <td><%= menu.title %></td>
         <td><%= menu.date %></td>
         <td><%= menu.price %></td>
-        <td><%= menu.restrant_id %></td>
+        <td><%= menu.restaurant_id %></td>
         <td><%=l menu.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_restrant_menu_path(@restrant, menu), :class => 'btn btn-mini' %>
+                      edit_restaurant_menu_path(@restaurant, menu), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      restrant_menu_path(@restrant, menu),
+                      restaurant_menu_path(@restaurant, menu),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                       :class => 'btn btn-mini btn-danger' %>
@@ -36,5 +36,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_restrant_menu_path(@restrant),
+            new_restaurant_menu_path(@restaurant),
             :class => 'btn btn-primary' %>

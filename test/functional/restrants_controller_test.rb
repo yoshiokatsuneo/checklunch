@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class RestrantsControllerTest < ActionController::TestCase
+class RestaurantsControllerTest < ActionController::TestCase
   setup do
-    @restrant = restrants(:one)
+    @restaurant = restaurants(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:restrants)
+    assert_not_nil assigns(:restaurants)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class RestrantsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create restrant" do
-    assert_difference('Restrant.count') do
-      post :create, restrant: { logo_url: @restrant.logo_url, name: @restrant.name, url: @restrant.url }
+  test "should create restaurant" do
+    assert_difference('Restaurant.count') do
+      post :create, restaurant: { logo_url: @restaurant.logo_url, name: @restaurant.name, url: @restaurant.url }
     end
 
-    assert_redirected_to restrant_path(assigns(:restrant))
+    assert_redirected_to restaurant_path(assigns(:restaurant))
   end
 
-  test "should show restrant" do
-    get :show, id: @restrant
+  test "should show restaurant" do
+    get :show, id: @restaurant
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @restrant
+    get :edit, id: @restaurant
     assert_response :success
   end
 
-  test "should update restrant" do
-    put :update, id: @restrant, restrant: { logo_url: @restrant.logo_url, name: @restrant.name, url: @restrant.url }
-    assert_redirected_to restrant_path(assigns(:restrant))
+  test "should update restaurant" do
+    put :update, id: @restaurant, restaurant: { logo_url: @restaurant.logo_url, name: @restaurant.name, url: @restaurant.url }
+    assert_redirected_to restaurant_path(assigns(:restaurant))
   end
 
-  test "should destroy restrant" do
-    assert_difference('Restrant.count', -1) do
-      delete :destroy, id: @restrant
+  test "should destroy restaurant" do
+    assert_difference('Restaurant.count', -1) do
+      delete :destroy, id: @restaurant
     end
 
-    assert_redirected_to restrants_path
+    assert_redirected_to restaurants_path
   end
 end

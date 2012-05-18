@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:restrant_id) %></th>
+      <th><%= model_class.human_attribute_name(:restaurant_id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
@@ -22,9 +22,9 @@
       <tr>
         <td><%= link_to menu.id, menu_path(menu) %></td>
         <td>
-     <%= link_to(image_tag(Restrant.find(menu.restrant_id).logo_url, width:"100"), restrant_path(menu.restrant_id)) %>
+     <%= link_to(image_tag(Restaurant.find(menu.restaurant_id).logo_url, width:"100"), restaurant_path(menu.restaurant_id)) %>
 <br/>
-	 <%=  link_to(Restrant.find(menu.restrant_id).name,restrant_path(menu.restrant_id))  %>
+	 <%=  link_to(Restaurant.find(menu.restaurant_id).name,restaurant_path(menu.restaurant_id))  %>
 	</td>
         <td><%= simple_format(h(menu.title)) %></td>
         <td><%= menu.date %></td>

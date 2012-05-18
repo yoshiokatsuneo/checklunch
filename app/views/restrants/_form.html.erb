@@ -1,4 +1,4 @@
-<%= form_for @restrant, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @restaurant, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
@@ -24,19 +24,19 @@
 	  <!-- Ref: RailsCasts #38 Multibutton Form (http://railscasts.com/episodes/38-multibutton-form) -->
       <%= f.submit 'Update menu now', :class => 'btn', :name => 'update_menu_from_url' %>
 	  <!-- %= link_to t('.edit', :default => t("Update menus")),
-              update_menu_from_url_restrant_path(@restrant), :class => 'btn' %-->
+              update_menu_from_url_restaurant_path(@restaurant), :class => 'btn' %-->
     </div>
   </div>
   <div class="control-group">
     <div class="controls">
-	  <%= if(@restrant[:id]) then link_to t('.edit', :default => t("Edit menus")),
-              restrant_menus_path(@restrant), :class => 'btn' ; end %>
+	  <%= if(@restaurant[:id]) then link_to t('.edit', :default => t("Edit menus")),
+              restaurant_menus_path(@restaurant), :class => 'btn' ; end %>
 	</div>
   </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                restrants_path, :class => 'btn' %>
+                restaurants_path, :class => 'btn' %>
   </div>
 <% end %>

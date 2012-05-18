@@ -14,17 +14,17 @@
   <%= @menu.price %>
 </p>
 <p>
-  <strong><%= model_class.human_attribute_name(:restrant_id) %>:</strong><br>
-  <%= @menu.restrant_id %>
+  <strong><%= model_class.human_attribute_name(:restaurant_id) %>:</strong><br>
+  <%= @menu.restaurant_id %>
 </p>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              restrant_menus_path(@restrant), :class => 'btn'  %>
+              restaurant_menus_path(@restaurant), :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_restrant_menu_path(@restrant,@menu), :class => 'btn' %>
+              edit_restaurant_menu_path(@restaurant,@menu), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              restrant_menu_path(@restrant, @menu),
+              restaurant_menu_path(@restaurant, @menu),
               :method => 'delete',
               :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
               :class => 'btn btn-danger' %>

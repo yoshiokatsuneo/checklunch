@@ -18,10 +18,10 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :restrant_id, :class => 'control-label' %>
+    <%= f.label :restaurant_id, :class => 'control-label' %>
     <div class="controls">
-      <!-- %= f.number_field :restrant_id, :class => 'number_field' %-->
-      <%= f.collection_select(:restrant_id, Restrant.all, :id, :name) %>
+      <!-- %= f.number_field :restaurant_id, :class => 'number_field' %-->
+      <%= f.collection_select(:restaurant_id, Restaurant.all, :id, :name) %>
     </div>
   </div>
 
