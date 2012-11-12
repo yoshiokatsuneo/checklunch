@@ -5,6 +5,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
       <th><%= model_class.human_attribute_name(:url) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -14,6 +15,14 @@
       <tr>
         <td><%= link_to restaurant.id, restaurant_path(restaurant) %></td>
         <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
+		<td>
+			<a href="http://maps.google.com?q=<%= restaurant.address %>">
+			<div id="map_canvas_<%= restaurant.id %>" style="width:100pt; height:100pt;">MAP</div>
+			</a>
+			<script>mapids_hash['<%= restaurant.id %>'] = "<%= restaurant.address %>"</script>
+			<div id='map_distance_<%= restaurant.id %>'>Distance</div>
+			<%= restaurant.address %>
+		</td>
         <!-- td><%= image_tag(restaurant.logo_url) %><br><br -->
         <td>
 		<%= link_to(image_tag(restaurant.logo_url), restaurant.url) %>

@@ -10,8 +10,8 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
-
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <script>mapids_hash={}</script>
 
     <link href="images/favicon.ico" rel="shortcut icon">
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
@@ -72,6 +72,12 @@
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <!-- script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script -->
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAqImVPrn6dxqNNcIKxzojO5cjcEIwcpqA&sensor=true&libraries=geometry"></script>
+    <!-- script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script -->
     <%= javascript_include_tag "application" %>
 
   </body>

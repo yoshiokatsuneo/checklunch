@@ -10,6 +10,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:restaurant_id) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
@@ -26,6 +27,14 @@
 <br/>
 	 <%=  link_to(Restaurant.find(menu.restaurant_id).name,restaurant_path(menu.restaurant_id))  %>
 	</td>
+		<td>
+			<a href="http://maps.google.com?q=<%= Restaurant.find(menu.restaurant_id).address %>">
+			<div id="map_canvas_<%= menu.id %>" style="width:80pt; height:80pt;">MAP</div>
+			</a>
+			<script>mapids_hash['<%= menu.id %>'] = "<%= Restaurant.find(menu.restaurant_id).address %>"</script>
+			<div id='map_distance_<%= menu.id %>'>Distance</div>
+			<!-- %= Restaurant.find(menu.restaurant_id).address % -->
+		</td>
         <td><%= simple_format(h(menu.title)) %></td>
         <td><%= menu.date %></td>
         <td><%= menu.price %></td>
