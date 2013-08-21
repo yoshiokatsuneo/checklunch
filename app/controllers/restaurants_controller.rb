@@ -91,6 +91,9 @@ class RestaurantsController < ApplicationController
     restaurant.menus.destroy_all
     body = open(restaurant.menu_url).read
     doc = JSON.parse(body)
+    if doc.class != Array then
+    	return
+    end
     doc.each{|item|
         date = item['date']
         title = item['title']
