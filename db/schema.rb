@@ -11,21 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120518140406) do
-
-  create_table "allmenus", :force => true do |t|
-    t.string   "title"
-    t.date     "date"
-    t.float    "price"
-    t.integer  "restrant_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "allmenus", ["restrant_id"], :name => "index_allmenus_on_restrant_id"
+ActiveRecord::Schema.define(:version => 20130821125754) do
 
   create_table "menus", :force => true do |t|
-    t.string   "title"
+    t.text     "title"
     t.date     "date"
     t.float    "price"
     t.integer  "restaurant_id", :null => false
